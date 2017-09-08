@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="TomatoTimer2.TimerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TomatoTimer2"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="300"
+             Background="AliceBlue">
+    <UserControl.DataContext>
+        <local:TimerViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="{Binding Counter.DisplayerForTimerCounting}" FontSize="80" Width="200" Height="100" Margin="0,30,0,30"/>
+            <TextBlock Text="{Binding TimeManager.StatusOfMode}" FontSize="20" Width="200" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Button Command="{Binding StartCountDownCommand}" Width="100" Height="30" Content="시작"/>
+            <Button Command="{Binding PauseCountDownCommand}" Width="100" Height="30" Content="잠시멈춤"/>
+            <Button Command="{Binding StopCountDownCommand}" Width="100" Height="30" Content="중지"/>
+            <Button Command="{Binding SkipCommand}" Width="100" Height="30" Content="스킵"/>
+
+        </StackPanel>
+    </Grid>
+</UserControl>
