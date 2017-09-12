@@ -94,6 +94,21 @@ namespace TomatoTimer2
         }
 
 
+        public DelegateCommand ShowSetterViewCommand
+        {
+            get
+            {
+                return new DelegateCommand(delegate ()
+               {
+                   var window = WindowHelper.GetWindow<MainWindow>();
+                   var dc = window.DataContext as MainWindowViewModel;
+                   dc.showSetterView();
+               });
+            }
+        }
+
+
+
 
 
 

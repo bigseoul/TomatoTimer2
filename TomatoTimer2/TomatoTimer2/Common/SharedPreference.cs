@@ -79,6 +79,25 @@ namespace TomatoTimer2
         }
 
 
+        private Setter m_setter;
+        public Setter Setter
+        {
+            get
+            {
+                if(m_setter == null)
+                {
+                    m_setter = new Setter();
+                }
+                return m_setter;
+            }
+            set
+            {
+                m_setter = value;
+                RaisePropertyChanged("Setter");
+            }
+        }
+
+
         #endregion
 
         #region property

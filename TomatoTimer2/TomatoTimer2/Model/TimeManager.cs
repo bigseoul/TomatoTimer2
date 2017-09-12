@@ -28,7 +28,7 @@ namespace TomatoTimer2
         //일 상태값
         private bool isWork = false;
 
-        //각모드를 나태나는 값
+        //각모드를 나태나는 값s
         //timerViewModel에서 가져다 씀. 
         private string m_statusOfMode = string.Empty;
         public string StatusOfMode

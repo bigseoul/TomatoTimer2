@@ -18,6 +18,8 @@
             <Button Command="{Binding PauseCountDownCommand}" Width="100" Height="30" Content="잠시멈춤"/>
             <Button Command="{Binding StopCountDownCommand}" Width="100" Height="30" Content="중지"/>
             <Button Command="{Binding SkipCommand}" Width="100" Height="30" Content="스킵"/>
+            <Button Command="{Binding ShowSetterViewCommand}" Width="100" Height="30" Content="세팅"/>
+
 
         </StackPanel>
     </Grid>
