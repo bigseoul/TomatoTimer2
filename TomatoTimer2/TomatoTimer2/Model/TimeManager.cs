@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,12 +16,44 @@ namespace TomatoTimer2
     /// </summary>
     public class TimeManager : BindableBase
     {
-        //각 모드별 시간 (초)
-        //세팅이 설정해줄 것. 
-        private double durationPerWokring = 4; //1500
-        private double durationPerShortBreak = 2; //300
-        private double durationPerLongBreak = 3; //900
-        
+        private int multiplicationForSecond = 1; //60곱하면 분
+
+        public Setter Setter
+        {
+            get
+            {
+                return SharedPreference.Instance.Setter;
+            }
+        }
+       
+        public double DurationPerWorking
+        {
+            get
+            {
+                return Setter.DurationPerWorking * multiplicationForSecond;
+            }
+          
+        }
+
+        public double DurationPerShortBreak
+        {
+            get
+            {
+                return Setter.DurationPerShortBreak * multiplicationForSecond;
+            }
+           
+        }
+
+        public double DurationPerLongBreak
+        {
+            get
+            {
+                return Setter.DurationPerLongBreak * multiplicationForSecond;
+            }
+
+        }
+
+      
         //일한 횟수
         //세팅이 설정해줌. 
         private int numberOfWorking = 0;
@@ -45,7 +78,6 @@ namespace TomatoTimer2
         }
 
 
-
         public double informHowLongCountDown()
         {
             //1. 기존 상태가 일인가?
@@ -59,20 +91,22 @@ namespace TomatoTimer2
                 {
                     isWork = false;
                     StatusOfMode = "짧은 휴식 시간";
-                    return durationPerShortBreak;
+                    return DurationPerShortBreak;
                 }
                 else if((numberOfWorking % 4) == 0)
                 {
                     isWork = false;
                     StatusOfMode = "긴 휴식 시간";
-                    return durationPerLongBreak;
+                    return DurationPerLongBreak;
                 }// if end
             }//if end
 
             numberOfWorking = numberOfWorking + 1;
             isWork = true;
             StatusOfMode = "일 하는 시간";
-            return durationPerWokring;
+            return DurationPerWorking;
         }
+
+       
     }
 }

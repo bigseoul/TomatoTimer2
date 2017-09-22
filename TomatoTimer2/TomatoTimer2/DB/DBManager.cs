@@ -39,49 +39,12 @@ namespace TomatoTimer2
         {
 
             //계정 테이블 유효성 검사
-            //var e = OperateQueryHandler.DoQuery(CreateTableQuery.T_CUSTOMER);
-            //if (e != null)
-            //{
-            //    Console.Out.WriteLineAsync(string.Format("{0}", e.ToString()));
-            //}
-
-            //e = OperateQueryHandler.DoQuery(CreateTableQuery.T_MENU_ITEM);
-            //if (e != null)
-            //{
-            //    Console.Out.WriteLineAsync(string.Format("{0}", e.ToString()));
-            //}
-
-          
-            //e = OperateQueryHandler.DoQuery(CreateTableQuery.T_RECIPE);
-            //if (e != null)
-            //{
-            //    Console.Out.WriteLineAsync(string.Format("{0}", e.ToString()));
-            //}
-
-            //e = OperateQueryHandler.DoQuery(CreateTableQuery.T_CLASSROOM);
-            //if (e != null)
-            //{
-            //    Console.Out.WriteLineAsync(string.Format("{0}", e.ToString()));
-            //}
-
-            //e = OperateQueryHandler.DoQuery(CreateTableQuery.T_STUDENT);
-            //if (e != null)
-            //{
-            //    Console.Out.WriteLineAsync(string.Format("{0}", e.ToString()));
-            //}
-
-            //e = OperateQueryHandler.DoQuery(CreateTableQuery.T_SCORE);
-            //if (e != null)
-            //{
-            //    Console.Out.WriteLineAsync(string.Format("{0}", e.ToString()));
-            //}
-
-            //e = OperateQueryHandler.DoQuery(CreateTableQuery.T_UNIVERSITY);
-            //if (e != null)
-            //{
-            //    Console.Out.WriteLineAsync(string.Format("{0}", e.ToString()));
-            //}
-
+            var e = OperateQueryHandler.DoQuery(CreateTableQuery.T_SETTER);
+            if (e != null)
+            {
+                Console.Out.WriteLineAsync(string.Format("{0}", e.ToString()));
+            }
+            
 
         }
 

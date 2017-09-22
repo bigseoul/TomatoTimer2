@@ -31,6 +31,23 @@ namespace TomatoTimer2
         }
 
 
+        public DelegateCommand LoadedCommand
+        {
+            get
+            {
+                return new DelegateCommand(delegate ()
+               {
+                   Counter.IsEnabledForStart = true;
+                   Counter.IsEnabledForPause = false;
+                   Counter.IsEnabledForStop = false;
+                   Counter.IsEnabledForSkip = false;
+                   Counter.IsEnabledForSetter = true;
+               });
+            }
+        }
+
+
+
         private bool m_isStart;
         public bool IsStart
         {

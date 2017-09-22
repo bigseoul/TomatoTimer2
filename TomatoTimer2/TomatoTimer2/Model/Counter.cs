@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,7 +16,6 @@ namespace TomatoTimer2
     /// </summary>
     public class Counter : BindableBase
     {
-        
 
         public TimeManager TimeManager
         {
@@ -24,7 +24,6 @@ namespace TomatoTimer2
                 return SharedPreference.Instance.TimeManager;
             }
         }
-
 
         private bool m_isPause;
         public bool IsPause
@@ -39,6 +38,83 @@ namespace TomatoTimer2
                 RaisePropertyChanged("IsPause");
             }
         }
+
+        //타이머에 있는 버튼 인에블러,
+        //뷰모델에 있어야 할 듯 한데, 구조상 여기다 둔다.
+        private bool m_isEnabledForStart;
+        public bool IsEnabledForStart
+        {
+            get
+            {
+                return m_isEnabledForStart;
+            }
+            set
+            {
+                m_isEnabledForStart = value;
+                RaisePropertyChanged("IsEnabledForStart");
+            }
+        }
+
+
+        private bool m_isEnabledForPause;
+        public bool IsEnabledForPause
+        {
+            get
+            {
+                return m_isEnabledForPause;
+            }
+            set
+            {
+                m_isEnabledForPause = value;
+                RaisePropertyChanged("IsEnabledForPause");
+            }
+        }
+
+
+        private bool m_isEnabledForStop;
+        public bool IsEnabledForStop
+        {
+            get
+            {
+                return m_isEnabledForStop;
+            }
+            set
+            {
+                m_isEnabledForStop = value;
+                RaisePropertyChanged("IsEnabledForStop");
+            }
+        }
+
+
+        private bool m_isEnabledForSkip;
+        public bool IsEnabledForSkip
+        {
+            get
+            {
+                return m_isEnabledForSkip;
+            }
+            set
+            {
+                m_isEnabledForSkip = value;
+                RaisePropertyChanged("IsEnabledForSkip");
+            }
+        }
+
+
+        private bool m_isEnabledForSetter;
+        public bool IsEnabledForSetter
+        {
+            get
+            {
+                return m_isEnabledForSetter;
+            }
+            set
+            {
+                m_isEnabledForSetter = value;
+                RaisePropertyChanged("IsEnabledForSetter");
+            }
+        }
+
 
         public DispatcherTimer timer;
         //TimeSpan represents a length of time.
@@ -74,13 +150,20 @@ namespace TomatoTimer2
                 RaisePropertyChanged("DisplayerForTimerCounting");
             }
         }
+        private bool isPlay = SharedPreference.Instance.Setter.IsPlayBeep;
+        SoundPlayer player = new SoundPlayer(TomatoTimer2.Properties.Resources.TwoToneChime);
 
         #region method
         //시간을 재는 외부인터페이스
         public void startCountDown()
         {
             //1. 시간관리자에게 얼마나 세어야 하는지 메서드
-            //2. 시간을 재는 매서드
+            //2. 시간을 재는 매서드         
+            IsEnabledForStart = false;
+            IsEnabledForPause = true;
+            IsEnabledForStop = true;
+            IsEnabledForSkip = true;
+            IsEnabledForSetter = false;
             tickTimer();
         }
 
@@ -94,6 +177,12 @@ namespace TomatoTimer2
                 IsPause = true;
                 //3. 타이머에 남은 시간을 저장한다. 
                 RemainingTime = time.TotalSeconds;
+                IsEnabledForStart = true;
+                IsEnabledForPause = false;
+                IsEnabledForStop = true;
+                IsEnabledForSkip = false;
+                IsEnabledForSetter = true;
+                
             }              
         }
 
@@ -103,6 +192,11 @@ namespace TomatoTimer2
             timer.Stop();
             DisplayerForTimerCounting = "00:00";
             time = TimeSpan.Zero;
+            IsEnabledForStart = true;
+            IsEnabledForPause = false;
+            IsEnabledForStop = false;
+            IsEnabledForSkip = false;
+            IsEnabledForSetter = true;
         }
 
         public void skipCountDown()
@@ -137,13 +231,30 @@ namespace TomatoTimer2
                 if (time == TimeSpan.Zero)
                 {
                     //셀 시간이 끝나면, 디스패쳐 멈춤
+                    makeSound();
+                    //소리를 냄. 
                     timer.Stop();
+                    IsEnabledForStart = true;
+                    IsEnabledForPause = false;
+                    IsEnabledForStop = true;
+                    IsEnabledForSkip = false;
+                    IsEnabledForSetter = true;
+                   
                 }
                 //-1초 씩 빼줌. 
                 time = time.Add(TimeSpan.FromSeconds(-1));
                 //Trace.WriteLine(DisplayerForTimerCounting);
             }, Application.Current.Dispatcher);
             timer.Start();
+        }
+
+
+        public void makeSound()
+        {
+            if (isPlay == true)
+            {
+                player.Play();
+            }
         }
         #endregion method
     } // class end

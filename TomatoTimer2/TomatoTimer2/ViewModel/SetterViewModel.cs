@@ -34,6 +34,30 @@ namespace TomatoTimer2
         }
 
 
+        public DelegateCommand SaveCommand
+        {
+            get
+            {
+                return new DelegateCommand(delegate ()
+               {
+                   Setter.saveSetterValue();
+               });
+            }
+        }
+
+
+        public DelegateCommand DefaultCommand
+        {
+            get
+            {
+                return new DelegateCommand(delegate ()
+               {
+                   Setter.saveSetterDefaultValue();
+               });
+            }
+        }
+
+
 
     }
 }
