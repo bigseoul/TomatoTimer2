@@ -25,7 +25,16 @@ namespace TomatoTimer2
                 return SharedPreference.Instance.Setter;
             }
         }
-       
+
+        public Statistician Statistician
+        {
+            get
+            {
+                return SharedPreference.Instance.Statistician;
+            }
+        }
+
+
         public double DurationPerWorking
         {
             get
@@ -90,23 +99,42 @@ namespace TomatoTimer2
                 if((numberOfWorking % 4) != 0)
                 {
                     isWork = false;
-                    StatusOfMode = "짧은 휴식 시간";
+                    StatusOfMode = "Short Break";
                     return DurationPerShortBreak;
                 }
                 else if((numberOfWorking % 4) == 0)
                 {
                     isWork = false;
-                    StatusOfMode = "긴 휴식 시간";
+                    StatusOfMode = "Long Break";
                     return DurationPerLongBreak;
                 }// if end
             }//if end
 
             numberOfWorking = numberOfWorking + 1;
             isWork = true;
-            StatusOfMode = "일 하는 시간";
+            StatusOfMode = "Working";
             return DurationPerWorking;
         }
 
-       
+        public void timesUp()
+        {
+            //통계관리자에게, 날짜, 샌 시간, 작업타업, 횟수를 기록  
+            //ShortBreak 하던 중
+            if (StatusOfMode == "Short Break")
+            {
+                
+            }else if(StatusOfMode =="Long Break")
+            {
+
+            }
+            else if(StatusOfMode =="Working")
+            {
+                
+            }
+                   
+
+        }
+
+
     }
 }

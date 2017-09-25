@@ -98,6 +98,22 @@ namespace TomatoTimer2
         }
 
 
+        private Statistician m_statistician;
+        public Statistician Statistician
+        {
+            get
+            {
+                return m_statistician;
+            }
+            set
+            {
+                m_statistician = value;
+                RaisePropertyChanged("Statistician");
+            }
+        }
+
+
+
         #endregion
 
         #region property

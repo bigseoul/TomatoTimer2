@@ -231,15 +231,22 @@ namespace TomatoTimer2
                 if (time == TimeSpan.Zero)
                 {
                     //셀 시간이 끝나면, 디스패쳐 멈춤
-                    makeSound();
-                    //소리를 냄. 
-                    timer.Stop();
+
+                    //버튼 상태 변경
                     IsEnabledForStart = true;
                     IsEnabledForPause = false;
                     IsEnabledForStop = true;
                     IsEnabledForSkip = false;
                     IsEnabledForSetter = true;
-                   
+
+                    //소리를 냄. 
+                    makeSound();
+
+                    //타이머 멈춤
+                    timer.Stop();
+
+                    //시간 관리자에게 다 새었다고 알려준다.
+                    TimeManager.timesUp();
                 }
                 //-1초 씩 빼줌. 
                 time = time.Add(TimeSpan.FromSeconds(-1));
